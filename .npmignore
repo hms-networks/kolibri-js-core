@@ -1,0 +1,8 @@
+tsconfig.json
+src
+test
+webpack*.ts
+jest.config.js
+tsconfig.*.json
+.prettierrc
+.eslintrc
