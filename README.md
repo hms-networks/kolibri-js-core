@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/@hms-networks%2Fkolibri-js-core.svg)](https://badge.fury.io/js/@hms-networks%2Fkolibri-js-core)
+
 # Kolibri-JS-Core
 
 The library contains the core models and utils of the Kolibri Protocol.
