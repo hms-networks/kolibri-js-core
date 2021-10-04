@@ -26,11 +26,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
-    - run: npm run test:ci
     - uses: artiomtr/jest-coverage-report-action@v2.0-rc.4
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        skip-step: all
+        skip-step: install
         annotations: none
-        coverage-file: ./test/result/coverage/coverage-final.json
         #   threshold: 80 # optional parameter
