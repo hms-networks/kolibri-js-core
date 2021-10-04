@@ -25,10 +25,8 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci
     - uses: artiomtr/jest-coverage-report-action@v2.0-rc.4
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        skip-step: install
         annotations: none
         #   threshold: 80 # optional parameter
