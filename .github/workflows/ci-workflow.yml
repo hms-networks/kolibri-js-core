@@ -26,7 +26,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
-    - run: npx jest --ci --coverage --coverageReporters="text" --coverageReporters="text-summary"
+    - run: npm run test:ci
     - uses: artiomtr/jest-coverage-report-action@v2.0-rc.4
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
