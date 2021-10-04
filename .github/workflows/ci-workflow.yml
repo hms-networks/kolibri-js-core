@@ -31,3 +31,10 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
          test-command: "npm run test:ci"
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: success() || failure()   
+      with:
+        name: JEST Tests            
+        path: test/result/junit.xml   
+        reporter: jest-junit        
