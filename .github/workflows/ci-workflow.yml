@@ -27,3 +27,12 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
     - run: npm run test:ci
+  coverage:
+        runs-on: ubuntu-20.04
+        if: "!contains(github.event.head_commit.message, '[skip ci]')"
+        steps:
+            - uses: actions/checkout@v2
+            - uses: artiomtr/jest-coverage-report-action@v2.0-rc.4
+              with:
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
+                  #   threshold: 80 # optional parameter
