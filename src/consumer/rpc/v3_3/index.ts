@@ -1,6 +1,7 @@
 export * from './general/login';
 export * from './general/update_token';
 export * from './general/logout';
+export * from './node/node_notify';
 
 export * from '../v3_2/general/subscribe';
 export * from '../v3_2/node/node_delete_history';

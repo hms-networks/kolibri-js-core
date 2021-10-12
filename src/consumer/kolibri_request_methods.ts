@@ -38,6 +38,7 @@ export namespace KolibriRequestMethods {
     export const NodeGetPropertiesRequestMethod = 'kolibri.node.getProperties';
     export const NodeModifyRequestMethod = 'kolibri.node.modify';
     export const NodeDeleteHistoryRequestMethod = 'kolibri.node.deleteHistory';
+    export const NodeNotifyRequestMethod = 'kolibri.node.notify';
     // Permission
     export const PermissionNodeListRequestMethod = 'kolibri.permission.node.list';
     export const PermissionNodeSetRequestMethod = 'kolibri.permission.node.set';
