@@ -15,24 +15,88 @@
 */
 
 import { plainToClass, Type } from 'class-transformer';
-import { IsDefined, ValidateNested, IsBoolean } from 'class-validator';
+import { IsDefined, ValidateNested, IsNumber, IsOptional, IsEnum } from 'class-validator';
 import { KolibriRequestMethods } from '../../../kolibri_request_methods';
 import { IsKolibriNodePath } from '../../../../validation/decorators/is_kolibri_node_path';
 import { JsonRpcId } from '../../../jsonrpc';
 import { KolibriRequest } from '../../../kolibri_request';
 import { DefaultKolibriResponse } from '../../../kolibri_response';
+import { IsNodeNotifyObject } from '../../../../validation/decorators/is_node_notify_object';
+
+export enum NotifyEvents {
+    'created',
+    'changed',
+    'deleted',
+    'permission-granted',
+    'permission-revoked'
+}
 
 export class NodeNotifyParams {
+    @IsEnum(NotifyEvents)
+    event: string;
+
     @IsKolibriNodePath()
     path: string;
 
-    @IsBoolean()
-    active: boolean;
+    @IsNumber()
+    timestamp: number;
 
-    constructor(path: string, active: boolean) {
+    @IsOptional()
+    @IsNodeNotifyObject()
+    data?: NodeNotifyObject | undefined;
+
+    constructor(event: string, path: string, timestamp: number, data?: NodeNotifyObject) {
+        this.event = event;
         this.path = path;
-        this.active = active;
+        this.timestamp = timestamp;
+        this.data = data;
     }
+}
+
+export class NodeNotifyObject {
+    description?: string;
+    flags?: number;
+    dataType?: number;
+    triggerMode?: number;
+    triggerN?: boolean | number | string;
+    triggerT?: number;
+    triggerDomain?: number;
+    qosLevel?: number;
+    history?: number;
+    format?: string;
+    scalingFactor?: number;
+    scalingOffset?: number;
+    writeRangeMin?: number;
+    writeRangeMax?: number;
+    permissions?: NodePermissions;
+
+    constructor(description?: string, flags?: number, dataType?: number, triggerMode?: number,
+        triggerN?: boolean | number | string, triggerT?: number, triggerDomain?: number, qosLevel?: number,
+        history?: number, format?: string, scalingFactor?: number, scalingOffset?: number,
+        writeRangeMin?: number, writeRangeMax?: number, permissions?: NodePermissions) {
+        this.description = description;
+        this.flags = flags;
+        this.dataType = dataType;
+        this.triggerMode = triggerMode;
+        this.triggerN = triggerN;
+        this.triggerT = triggerT;
+        this.triggerDomain = triggerDomain;
+        this.qosLevel = qosLevel;
+        this.history = history;
+        this.format = format;
+        this.scalingFactor = scalingFactor;
+        this.scalingOffset = scalingOffset;
+        this.writeRangeMax = writeRangeMax;
+        this.writeRangeMin = writeRangeMin;
+        this.permissions = permissions;
+    }
+}
+export class NodePermissions {
+    constructor(
+        public read?: boolean,
+        public write?: boolean,
+        public config?: boolean
+    ) { }
 }
 
 export class NodeNotifyRequest extends KolibriRequest<NodeNotifyParams> {

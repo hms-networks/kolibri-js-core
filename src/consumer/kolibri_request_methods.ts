@@ -38,7 +38,8 @@ export namespace KolibriRequestMethods {
     export const NodeGetPropertiesRequestMethod = 'kolibri.node.getProperties';
     export const NodeModifyRequestMethod = 'kolibri.node.modify';
     export const NodeDeleteHistoryRequestMethod = 'kolibri.node.deleteHistory';
-    export const NodeNotifyRequestMethod = 'kolibri.node.notify';
+    export const NodeSubscribeRequestMethod = 'kolibri.node.subscribe';
+    export const NodeUnsubscribeRequestMethod = 'kolibri.node.unsubscribe';
     // Permission
     export const PermissionNodeListRequestMethod = 'kolibri.permission.node.list';
     export const PermissionNodeSetRequestMethod = 'kolibri.permission.node.set';
@@ -79,4 +80,5 @@ export namespace KolibriRequestMethods {
     // Broker to Consumer only
     export const UnsubscribedRequestMethod = 'kolibri.unsubscribed';
     export const UserNotifyRequestMethod = 'kolibri.user.notify';
+    export const NodeNotifyRequestMethod = 'kolibri.node.notify';
 }
