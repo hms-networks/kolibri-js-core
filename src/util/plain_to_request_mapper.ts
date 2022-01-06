@@ -381,6 +381,8 @@ export class PlainToRequestMapper {
         map.set(KolibriRequestMethods.LoginRequestMethod, cV33.toLoginRequest);
         map.set(KolibriRequestMethods.LogoutRequestMethod, cV33.toLogoutRequest);
         map.set(KolibriRequestMethods.UpdateTokenMethod, cV33.toUpdateTokenRequest);
+        map.set(KolibriRequestMethods.NodeSubscribeRequestMethod, cV33.toNodeSubscribeRequest);
+        map.set(KolibriRequestMethods.NodeUnsubscribeRequestMethod, cV33.toNodeUnsubscribeRequest);
         PlainToRequestMapper.map.set(version.semVer.raw, map);
     }
 }
