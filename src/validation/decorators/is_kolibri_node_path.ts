@@ -27,12 +27,15 @@ import {
 } from 'class-validator';
 import { constants } from '../../common/constant';
 
+export function isKolibriNodePath(value: any) {
+    return isString(value) &&
+        length(value, 1, constants.DT_STRING_MAXLEN) &&
+        matches(value, /^\/(([a-z0-9][a-z0-9_.-]{0,30}\/?)*[a-z0-9])?$/i);
+}
 @ValidatorConstraint({ name: 'isKolibriNodePath', async: true })
 export class IsKolibriNodePathConstraint implements ValidatorConstraintInterface {
     validate(path: any, _args: ValidationArguments) {
-        return isString(path) &&
-            length(path, 1, constants.DT_STRING_MAXLEN) &&
-            matches(path, /^\/(([a-z0-9][a-z0-9_.-]{0,30}\/?)*[a-z0-9])?$/i);
+        return isKolibriNodePath(path);
     }
 
     defaultMessage(_args: ValidationArguments) {

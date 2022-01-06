@@ -25,11 +25,15 @@ import {
 import { format } from 'date-fns';
 
 
+export function isKolibriDate(value: any) {
+    const dateString = format(new Date(value), 'yyyy-MM-dd');
+    return isDateString(value) && value === dateString;
+}
+
 @ValidatorConstraint({ name: 'isKolibriDate', async: true })
 export class IsKolibriDateConstraint implements ValidatorConstraintInterface {
     validate(date: any, _args: ValidationArguments) {
-        const dateString = format(new Date(date), 'yyyy-MM-dd');
-        return isDateString(date) && date === dateString;
+        return isKolibriDate(date);
     }
 
     defaultMessage(_args: ValidationArguments) {
