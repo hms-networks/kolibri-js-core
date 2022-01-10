@@ -21,24 +21,22 @@ import {
     ValidatorConstraint,
     ValidatorConstraintInterface,
     ValidationArguments,
-    isBoolean,
-    isString,
     isNumber
 } from 'class-validator';
 
 
+export function isKolibriNodeTriggerN(value: any) {
+    return isNumber(value);
+}
+
 @ValidatorConstraint({ name: 'isKolibriNodeTriggerN', async: true })
 export class IsKolibriNodeTriggerNConstraint implements ValidatorConstraintInterface {
     validate(triggerN: any, _args: ValidationArguments) {
-        if (!isBoolean(triggerN) && !isString(triggerN) && !isNumber(triggerN)) {
-            return false;
-        }
-
-        return true;
+        return isKolibriNodeTriggerN(triggerN);
     }
 
     defaultMessage(_args: ValidationArguments) {
-        return `TriggerT invalid`;
+        return `TriggerN invalid`;
     }
 }
 

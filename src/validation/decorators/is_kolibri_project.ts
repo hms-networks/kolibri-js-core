@@ -29,12 +29,16 @@ import { constants } from '../../common/constant';
 
 export const IS_KOLIBRI_PROJECT = 'isKolibriProject';
 
+export function isKolibriProject(value: any) {
+    return isString(value) &&
+        maxLength(value, constants.PROJECT_NAME_MAXLEN) &&
+        matches(value, /^(([a-z0-9])|([a-z0-9][a-z0-9-]{0,30}[a-z0-9]))$/i);
+}
+
 @ValidatorConstraint({ name: IS_KOLIBRI_PROJECT, async: true })
 export class IsKolibriProjectConstraint implements ValidatorConstraintInterface {
     validate(project: any, _args: ValidationArguments) {
-        return isString(project) &&
-            maxLength(project, constants.PROJECT_NAME_MAXLEN) &&
-            matches(project, /^(([a-z0-9])|([a-z0-9][a-z0-9-]{0,30}[a-z0-9]))$/i);
+        return isKolibriProject(project);
     }
 
     defaultMessage(_args: ValidationArguments) {
@@ -42,6 +46,7 @@ export class IsKolibriProjectConstraint implements ValidatorConstraintInterface 
         up to 32 characters from the character class [a-zA-Z0-9-]. It is case-insensitive.`;
     }
 }
+
 
 export function IsKolibriProject(validationOptions?: ValidationOptions) {
     return function (object: Object, propertyName: string) {

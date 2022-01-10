@@ -25,17 +25,22 @@ import {
     min,
     max
 } from 'class-validator';
+import { constants } from '../../common/constant';
 import { KolibriError, errorcode } from '../../common/errorcode';
 
+
+export function isKolibriNodeTriggerT(value: any) {
+    if (!isInt(value) || !min(value, 0) || !max(value, constants.DT_UINT_32BIT_MAX)) {
+        throw new KolibriError(errorcode.INVALID_VALUE, 'triggerT invalid');
+    }
+
+    return true;
+}
 
 @ValidatorConstraint({ name: 'isKolibriNodeTriggerT', async: true })
 export class IsKolibriNodeTriggerTConstraint implements ValidatorConstraintInterface {
     validate(triggerT: any, _args: ValidationArguments) {
-        if (!isInt(triggerT) || !min(triggerT, 0) || !max(triggerT, 4294967295)) {
-            throw new KolibriError(errorcode.INVALID_VALUE, 'triggerT invalid');
-        }
-
-        return true;
+        return isKolibriNodeTriggerT(triggerT);
     }
 
     defaultMessage(_args: ValidationArguments) {

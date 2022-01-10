@@ -29,12 +29,17 @@ import { constants } from '../../common/constant';
 
 export const IS_KOLIBRI_USER_GROUP = 'isKolibriUserGroup';
 
+
+export function isKolibriUserGroup(value: any) {
+    return isString(value) &&
+        maxLength(value, constants.USER_NAME_MAXLEN) &&
+        matches(value, /^(([a-z0-9])|([a-z0-9][a-z0-9_.-]{0,30}[a-z0-9]))$/i);
+}
+
 @ValidatorConstraint({ name: IS_KOLIBRI_USER_GROUP, async: true })
 export class IsKolibriUserGroupConstraint implements ValidatorConstraintInterface {
     validate(user: any, _args: ValidationArguments) {
-        return isString(user) &&
-            maxLength(user, constants.USER_NAME_MAXLEN) &&
-            matches(user, /^(([a-z0-9])|([a-z0-9][a-z0-9_.-]{0,30}[a-z0-9]))$/i);
+        return isKolibriUserGroup(user);
     }
 
     defaultMessage(_args: ValidationArguments) {

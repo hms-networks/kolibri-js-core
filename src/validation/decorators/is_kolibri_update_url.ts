@@ -26,22 +26,26 @@ import {
 import Url from 'url-parse';
 import { constants } from '../../common/constant';
 
+export function isKolibriUpdateUrl(value: any) {
+    if (isString(value) &&
+        !(value.length > constants.DT_STRING_MAXLEN) &&
+        value !== '') {
+        const url = new Url(value);
+        if (url.protocol === 'https:' ||
+            url.protocol === 'http:' ||
+            url.host === null
+        ) {
+            return true;
+        }
+    }
+    return false;
+}
+
 
 @ValidatorConstraint({ name: 'isKolibriUpdateUrl', async: true })
 export class IsKolibriUpdateUrlConstraint implements ValidatorConstraintInterface {
     validate(updateUrl: any, _args: ValidationArguments) {
-        if (isString(updateUrl) &&
-            !(updateUrl.length > constants.DT_STRING_MAXLEN) &&
-            updateUrl !== '') {
-            const url = new Url(updateUrl);
-            if (url.protocol === 'https:' ||
-                url.protocol === 'http:' ||
-                url.host === null
-            ) {
-                return true;
-            }
-        }
-        return false;
+        return isKolibriUpdateUrl(updateUrl);
     }
 
     defaultMessage(_args: ValidationArguments) {

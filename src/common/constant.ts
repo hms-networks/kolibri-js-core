@@ -136,6 +136,8 @@ export namespace constants {
     export const DT_MAX = 13;
     export const DT_RESERVED = 11;
 
+    export const DT_UINT_32BIT_MAX = 4294967295;
+    export const DT_UINT_16BIT_MAX = 65535;
     export const DT_FLOATING_32BIT_MIN = 1.176e-38;
     export const DT_FLOATING_32BIT_MAX = 3.4028e38;
     export const DT_FLOAT64_MAX_INT = '9007199254740991';
