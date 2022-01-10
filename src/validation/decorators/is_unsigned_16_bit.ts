@@ -25,11 +25,12 @@ import {
     min,
     max
 } from 'class-validator';
+import { constants } from '../../common/constant';
 
 export const IS_UNSIGNED_16_BIT = 'isUnsigned16Bit';
 
 export function isUnsigned16Bit(value: unknown): boolean {
-    return isInt(value) && min(value, 0) && max(value, 65535);
+    return isInt(value) && min(value, 0) && max(value, constants.DT_UINT_16BIT_MAX);
 }
 
 @ValidatorConstraint({ name: IS_UNSIGNED_16_BIT, async: true })

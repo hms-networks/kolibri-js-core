@@ -25,11 +25,12 @@ import {
     min,
     max
 } from 'class-validator';
+import { constants } from '../../common/constant';
 import { KolibriError, errorcode } from '../../common/errorcode';
 
 
 export function isKolibriNodeTriggerT(value: any) {
-    if (!isInt(value) || !min(value, 0) || !max(value, 4294967295)) {
+    if (!isInt(value) || !min(value, 0) || !max(value, constants.DT_UINT_32BIT_MAX)) {
         throw new KolibriError(errorcode.INVALID_VALUE, 'triggerT invalid');
     }
 
