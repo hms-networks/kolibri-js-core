@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.1
+
+- chore: update npm dependencies
+
 ## 1.1.0
 
 - fix node path validator to fit kolibri spec
