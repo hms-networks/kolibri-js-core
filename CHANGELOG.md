@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.2
+
+- chore: update npm dependencies
+
 ## 1.1.1
 
 - chore: update npm dependencies
